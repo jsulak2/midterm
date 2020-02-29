@@ -2,6 +2,7 @@ package sample;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +32,14 @@ public class Controller
     @FXML
     private TextField firstNameTextField;
 
+    @FXML
+    JFXButton runButton;
+    @FXML
+    JFXButton loadButton;
+    @FXML
+    JFXTextField minTextField;
+    @FXML
+    JFXTextField maxTextField;
     @FXML
     JFXListView materialListView;
 

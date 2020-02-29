@@ -12,7 +12,7 @@
     <children>
         <HBox fx:id="HBox" layoutX="9.0" layoutY="16.0" prefHeight="340.0" prefWidth="619.0">
             <children>
-                <VBox fx:id="CVBox" prefHeight="340.0" prefWidth="334.0">
+                <VBox fx:id="VBox" prefHeight="340.0" prefWidth="334.0">
                     <children>
                         <ButtonBar fx:id="clearButtonBar" prefHeight="40.0" prefWidth="200.0">
                             <buttons>
@@ -23,13 +23,13 @@
                         <HBox prefHeight="49.0" prefWidth="334.0">
                             <children>
                                 <Label fx:id="minLabel" prefHeight="42.0" prefWidth="51.0" text="MIN" />
-                                <JFXTextField prefHeight="40.0" prefWidth="293.0" />
+                                <JFXTextField fx:id="minTextField" prefHeight="40.0" prefWidth="293.0" />
                             </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="50.0" prefHeight="49.0" prefWidth="334.0">
                             <children>
                                 <Label fx:id="maxLabel" prefHeight="45.0" prefWidth="48.0" text="MAX" />
-                                <JFXTextField prefHeight="40.0" prefWidth="291.0" />
+                                <JFXTextField fx:id="maxTextField" prefHeight="40.0" prefWidth="291.0" />
                             </children>
                         </HBox>
                         <HBox prefHeight="53.0" prefWidth="281.0">
