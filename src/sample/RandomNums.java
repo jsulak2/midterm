@@ -17,7 +17,7 @@ public class RandomNums
         num = Math.random()*hiNum+1;
         while (num<lowNum)
             num = Math.random()*hiNum+1;
-        Math.round(num);
+        num=Math.floor(num);
         randomNum = (num + "");
     }
 

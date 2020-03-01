@@ -40,6 +40,8 @@ public class Controller implements Initializable
     @FXML
     JFXButton loadButton;
     @FXML
+    JFXButton delButton;
+    @FXML
     JFXListView materialListView;
 
 
@@ -68,7 +70,7 @@ public class Controller implements Initializable
             {
                 System.out.println("TABLE ALREADY EXISTS, NOT CREATED");
             }
-//  CHANGE THESE LINES TO USE THE RANDOM NUMBER
+
             RandomNums rand = new RandomNums();
             String lo = minTextField.getText();
             String hi = maxTextField.getText();
@@ -77,9 +79,7 @@ public class Controller implements Initializable
             rand.generateRandomNum(loInt, hiInt);
             randNumLabel.setText(rand.toString());
 
-
-
-            String randomNum = "12345";
+            String randomNum = rand.toString();
             String sql = "INSERT INTO RandomNums VALUES" +
                     "('" + randomNum + "')";
             stmt.executeUpdate(sql);
@@ -160,81 +160,12 @@ public class Controller implements Initializable
                 loadData(AWS_URL);
             }
         });
-
-
-/*
-        deleteawsbutton.setOnAction(new EventHandler<ActionEvent>() {
+        delButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event)
             {
                 deleteTable(AWS_URL);
             }
         });
-        deletetablebutton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent)
-            {
-                deleteTable(DB_URL);
-            }
-        });
-
-        loadawsbutton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                loadData(AWS_URL);
-            }
-        });
-        loaddatabutton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent)
-            {
-                loadData(DB_URL);
-            }
-        });
-
-        employeeListView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Worker> ov, Worker old_val, Worker new_val) -> {
-            Worker selectedItem = employeeListView.getSelectionModel().getSelectedItem();
-            firstNameTextField.setText(((Employee)selectedItem).firstName);
-            isActiveCheckBox.setSelected(((Employee) selectedItem).isActive);
-
-        });
-
-
-        ObservableList<Worker> items = employeeListView.getItems();
-        Employee employee1 = new Employee();
-        employee1.firstName = "Alyssa";
-        employee1.lastName = "Anderson";
-        Employee employee2 = new Employee();
-        employee2.firstName = "Robert";
-        employee2.lastName = "Smith";
-
-        items.add(employee1);
-        items.add(employee2);
-
-        for(int i = 0; i < 10; i++)
-        {
-            Employee employee = new Employee();
-            employee.firstName = "EMPLOYEE" + i;
-            employee.lastName = "Incognito";
-            employee.isActive = true;
-            employee.id = UUID.randomUUID();
-            items.add(employee);
-        }
-
-        Staff staff1 = new Staff();
-        staff1.firstName = "Some Staff";
-        staff1.lastName = "Lee";
-        items.add(staff1);
-
-        Faculty faculty1 = new Faculty();
-        faculty1.firstName = "Some Faculty";
-        faculty1.lastName = "Diaz";
-        items.add(faculty1);
-
-
-*/
     }
-
-
 }
