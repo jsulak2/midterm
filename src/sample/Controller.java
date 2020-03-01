@@ -10,11 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
+import javax.swing.*;
+import java.awt.desktop.SystemSleepEvent;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,21 +24,21 @@ import java.util.UUID;
 
 
 
-public class Controller
+public class Controller implements Initializable
 {
     @FXML
     private ListView<RandomNums> generatedNums;
     @FXML
-    private TextField firstNameTextField;
+    private JFXTextField minTextField;
+    @FXML
+    private JFXTextField maxTextField;
+    @FXML
+    Label randNumLabel;
 
     @FXML
     JFXButton runButton;
     @FXML
     JFXButton loadButton;
-    @FXML
-    JFXTextField minTextField;
-    @FXML
-    JFXTextField maxTextField;
     @FXML
     JFXListView materialListView;
 
@@ -57,10 +56,11 @@ public class Controller
 
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
+
             try
             {
                 stmt.execute("CREATE TABLE RandomNums (" +
-                        "RandomNum INT(25)");
+                        "RandomNum VARCHAR(25))");
 
                 System.out.println("TABLE CREATED");
             }
@@ -69,17 +69,25 @@ public class Controller
                 System.out.println("TABLE ALREADY EXISTS, NOT CREATED");
             }
 //  CHANGE THESE LINES TO USE THE RANDOM NUMBER
-            String randomNum = "Bat";
+            RandomNums rand = new RandomNums();
+            String lo = minTextField.getText();
+            String hi = maxTextField.getText();
+            int loInt = Integer.parseInt(lo);
+            int hiInt = Integer.parseInt(hi);
+            rand.generateRandomNum(loInt, hiInt);
+            randNumLabel.setText(rand.toString());
+
+
+
+            String randomNum = "12345";
             String sql = "INSERT INTO RandomNums VALUES" +
                     "('" + randomNum + "')";
-
             stmt.executeUpdate(sql);
 
             System.out.println("TABLE FILLED");
 
             stmt.close();
             conn.close();
-
         }
         catch (Exception ex)
         {
@@ -117,24 +125,44 @@ public class Controller
             System.out.println(msg);
         }
     }
-/*
+    private void deleteTable(String url)
+    {
+        try{
+            Connection conn = DriverManager.getConnection(url);
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE RandomNums");
+            stmt.close();
+            conn.close();
+            System.out.println("TABLE DROPPED");
+        }
+        catch (Exception ex)
+        {
+            String msg = ex.getMessage();
+            System.out.println("TABLE NOT DROPPED");
+            System.out.println(msg);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        createawsbutton.setOnAction(new EventHandler<ActionEvent>() {
+        runButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event)
             {
                 createDatabase(AWS_URL);
             }
         });
-        createdbbutton.setOnAction(new EventHandler<ActionEvent>() {
+        loadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent)
             {
-                createDatabase(DB_URL);
+                loadData(AWS_URL);
             }
         });
+
+
+/*
         deleteawsbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event)
@@ -205,8 +233,8 @@ public class Controller
         items.add(faculty1);
 
 
-
-    }
 */
+    }
+
 
 }

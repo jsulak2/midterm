@@ -8,7 +8,7 @@
  <?import com.jfoenix.controls.JFXListView?>
  <?import com.jfoenix.controls.JFXToggleButton?>
 
- <AnchorPane maxHeight="1080" maxWidth="1920" prefHeight="300" prefWidth="700" xmlns:fx="http://javafx.com/fxml">
+ <AnchorPane fx:controller="sample.Controller" maxHeight="1080" maxWidth="1920" prefHeight="300" prefWidth="700" xmlns:fx="http://javafx.com/fxml">
     <children>
         <HBox fx:id="HBox" layoutX="9.0" layoutY="16.0" prefHeight="340.0" prefWidth="619.0">
             <children>
@@ -34,15 +34,20 @@
                         </HBox>
                         <HBox prefHeight="53.0" prefWidth="281.0">
                             <children>
-                                <Label fx:id="activeLabel" prefHeight="42.0" prefWidth="241.0" text="RANDOM GENERATED NUMBER:" />
-                                <Label prefHeight="44.0" prefWidth="77.0" underline="true" />
+                                <Label prefHeight="42.0" prefWidth="241.0" text="RANDOM GENERATED NUMBER:" />
+                                <Label fx:id="randNumLabel" prefHeight="44.0" prefWidth="77.0" underline="true" />
                             </children>
                         </HBox>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                            <buttons>
+                                <JFXButton fx:id="delButton" prefHeight="32.0" prefWidth="147.0" text="DELETE TABLE" />
+                            </buttons>
+                        </ButtonBar>
                     </children>
                 </VBox>
                 <VBox fx:id="LVBox" prefHeight="340.0" prefWidth="281.0">
                     <children>
-                        <JFXListView fx:id="numsList" />
+                        <JFXListView fx:id="materialListView" />
                     </children>
                 </VBox>
             </children>
